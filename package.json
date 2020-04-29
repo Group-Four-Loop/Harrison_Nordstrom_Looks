@@ -4,7 +4,7 @@
   "description": "Looks component for Nordstrom app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Group-Four-Loop/Harrison_Nordstrom_Looks/issues"
   },
-  "homepage": "https://github.com/Group-Four-Loop/Harrison_Nordstrom_Looks#readme"
+  "homepage": "https://github.com/Group-Four-Loop/Harrison_Nordstrom_Looks#readme",
+  "devDependencies": {
+    "jest": "^25.5.2"
+  }
 }
