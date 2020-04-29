@@ -4,6 +4,8 @@
   "description": "Looks component for Nordstrom app",
   "main": "index.js",
   "scripts": {
+    "compile": "webpack -d",
+    "start": "node server/index.js",
     "test": "jest"
   },
   "repository": {
@@ -18,5 +20,19 @@
   "homepage": "https://github.com/Group-Four-Loop/Harrison_Nordstrom_Looks#readme",
   "devDependencies": {
     "jest": "^25.5.2"
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-preset-react": "^6.24.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   }
 }
