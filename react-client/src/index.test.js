@@ -26,6 +26,7 @@ describe('Index Counting Component', () => {
 describe('Your soon to be carousel component', () => {
   it ('should have as many items as props', () => {
     const wrapper = shallow(<Look />);
+    //added a comment here!
     expect(wrapper.contains(<a key='one'>blah</a>)).toBe(false);
     // expect(wrapper.find('div').children()).lengthOf(4);
   })
