@@ -1,5 +1,6 @@
 import React from 'react';
-//import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
+import Look from './components/Look.jsx'
 
 class App extends React.Component {
   constructor(props) {
@@ -20,9 +21,11 @@ class App extends React.Component {
     return (
       <div>HELLO WORLD
         <p onClick= {() => {this.handleClick()}}>Count {this.state.count}</p>
+        <Look />
       </div>
     )
   }
 };
+
+//ReactDOM.render(<App />, document.getElementById('app'))
 export default App;
-// ReactDOM.render(<App />, document.getElementById('app'));
