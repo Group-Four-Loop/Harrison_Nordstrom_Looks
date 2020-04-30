@@ -28,6 +28,7 @@ describe('Your soon to be carousel component', () => {
     const wrapper = shallow(<Look />);
     //added a comment here!
     expect(wrapper.contains(<a key='one'>blah</a>)).toBe(false);
+    expect(wrapper.contains(<a key='one'>One</a>)).toBe(true);
     // expect(wrapper.find('div').children()).lengthOf(4);
   })
 
