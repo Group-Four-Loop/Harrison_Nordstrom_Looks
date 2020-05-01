@@ -4,8 +4,8 @@ class Look extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: ['one', 'two', 'three','four']
-    }
+      items: ['one', 'two', 'three', 'four']
+    };
   }
 
   render() {
@@ -14,10 +14,10 @@ class Look extends React.Component {
         {this.state.items.map((wheel) => {
           return (
             <a key={wheel}>{wheel}</a>
-          )
+          );
         })}
       </div>
-    )
+    );
   }
 }
 

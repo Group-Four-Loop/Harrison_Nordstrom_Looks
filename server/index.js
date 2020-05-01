@@ -13,4 +13,4 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.listen(port, () => {
   console.log('listening on port ' + port);
-})
+});
