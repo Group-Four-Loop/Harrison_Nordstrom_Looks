@@ -1,6 +1,7 @@
 import React from 'react';
 import Index from './index';
-import {shallow} from 'enzyme';
+import Look from './components/Look'
+import {mount, shallow} from 'enzyme';
 
 describe('Index Counting Component', () => {
   it('starts with 0', () => {
@@ -19,6 +20,17 @@ describe('Index Counting Component', () => {
     // Expectation to follow :D
     expect(countState).toEqual(0);
   });
+
+})
+
+describe('Your soon to be carousel component', () => {
+  it ('should have as many items as props', () => {
+    const wrapper = shallow(<Look />);
+    //added a comment here!
+    expect(wrapper.contains(<a key='one'>blah</a>)).toBe(false);
+    expect(wrapper.contains(<a key='one'>one</a>)).toBe(true);
+    // expect(wrapper.find('div').children()).lengthOf(4);
+  })
 
 })
 
