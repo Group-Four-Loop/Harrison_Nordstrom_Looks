@@ -149,7 +149,7 @@ let carouselJuncBot = {
   productId3: 6
 };
 let carouselJuncFeet = {
-  type: 'tops',
+  type: 'footwear',
   lookId: 1,
   productId1: 7,
   productId2: 8,
