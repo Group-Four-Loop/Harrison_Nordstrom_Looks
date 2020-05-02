@@ -1,4 +1,5 @@
 const faker = require('faker');
+const db = require('./db/connection.js');
 
 let types = [
   'tops',
@@ -23,26 +24,31 @@ const randomNum = (length) => {
   return (Math.floor(Math.random() * length));
 };
 
+
 let prod = {
-  name: faker.lorem.words(),
-  imgUrl: '',
-  type: types[randomNum(types.length)],
+  name: faker.lorem.word(),
+  imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/tops/10b3058c-d317-4813-b50e-c4889f7e88b0.jpeg',
+  type: 'tops',
   rating: randomNum(5),
   brand: faker.lorem.word(),
-  price: faker.random.number(),
-  description: faker.lorem.paragraph(),
+  price: randomNum(20),
+  description: faker.lorem.sentence(),
   size: sizes[randomNum(sizes.length)],
   colors: faker.commerce.color(),
-  productUrl: ''
+  productUrl: 'https://shop.nordstrom.com/s/5390901'
 };
 
 let look = {
   name: faker.commerce.productAdjective() + ' ' + faker.lorem.word(),
   creator: faker.name.findName(),
   creatorImgUrl: faker.image.avatar()
-}
+};
 
-const addItemsToLook = (x) => {
+db.insertIntoProducts(prod);
+
+
+/*
+const addItemsToLook = (currentIteration) => {
   let accessoryCount = 0;
   //generate a random number per our current iteration
   let itemCount = (num) => {
@@ -54,7 +60,7 @@ const addItemsToLook = (x) => {
   //define a list of items we need it include on our carousel
   let itemsToRender = [];
   //get a random number of items to include
-  let numItemsToShow = itemCount(x);
+  let numItemsToShow = itemCount(currentIteration);
   //get a random item from list of items
   while (numItemsToShow > 0) {
     let itemList = Array.from(items);
@@ -71,8 +77,12 @@ const addItemsToLook = (x) => {
     itemsToRender.push(anItem);
     numItemsToShow--;
   }
+  //* Populate the new look object with proper carousel IDs /
   for (var x = 0; x <= itemsToRender.length - 1; x++) {
     look[itemsToRender[x]] = //the id of a carouselJunc record with matching type and lookID
   }
 }
 
+
+
+*/
