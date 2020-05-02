@@ -13,7 +13,7 @@ class Look extends React.Component {
       <div key="look-panel">
         {this.state.items.map((wheel) => {
           return (
-            <a key={wheel}>{wheel}</a>
+            <img src="https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/Footwear/bfa5f26f-acbe-4352-a285-e9ddb3b7d558.jpeg" key={wheel}/>
           );
         })}
       </div>
