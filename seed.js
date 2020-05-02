@@ -158,7 +158,7 @@ let carouselJuncFeet = {
 db.insertIntoCarouselJunction(carouselJuncTop);
 db.insertIntoCarouselJunction(carouselJuncBot);
 db.insertIntoCarouselJunction(carouselJuncFeet);
-
+db.updateLookCarousels(1, {tops: 1, bottoms: 2, footwear: 3});
 /*
 const addItemsToLook = (currentIteration) => {
   let accessoryCount = 0;

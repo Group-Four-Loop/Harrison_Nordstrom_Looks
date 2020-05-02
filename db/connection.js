@@ -60,6 +60,16 @@ module.exports = {
         console.log('new junction inserted');
       }
     });
+  },
+
+  updateLookCarousels: (lookId, update) => {
+    client.query(`UPDATE TABLE looks SET tops=${update.top}, bottoms=${update.bottoms}, footwear=${update.footwear} WHERE id=${lookId}`, (err, result) => {
+      if (err) {
+        throw err;
+      } else {
+        console.log('successfullly updated Look table');
+      }
+    });
   }
 
 
