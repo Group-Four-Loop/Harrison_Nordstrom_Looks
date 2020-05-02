@@ -6,6 +6,17 @@ client.connect();
 
 module.exports = {
 
+  getItemsByLookId: (lookId, callback) => {
+    let sqlQuery = `SELECT * FROM carouselJunc LEFT JOIN products ON (productid1=products.id) OR (productid2=products.id) OR (productid3=products.id) WHERE carouselJunc.lookId=${lookId}`;
+    client.query(sqlQuery, (err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, result);
+      }
+    });
+  },
+
   getAllItems: (callback) => {
     client.query('select * from products', (err, result) => {
       if (err) {
@@ -63,7 +74,7 @@ module.exports = {
   },
 
   updateLookCarousels: (lookId, update) => {
-    client.query(`UPDATE TABLE looks SET tops=${update.top}, bottoms=${update.bottoms}, footwear=${update.footwear} WHERE id=${lookId}`, (err, result) => {
+    client.query(`UPDATE looks SET tops=${update.tops}, bottoms=${update.bottoms}, footwear=${update.footwear} WHERE id=${lookId}`, (err, result) => {
       if (err) {
         throw err;
       } else {

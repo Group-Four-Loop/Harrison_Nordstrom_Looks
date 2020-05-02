@@ -4,7 +4,7 @@
   "description": "Looks component for Nordstrom app",
   "main": "index.js",
   "scripts": {
-    "compile": "webpack -d",
+    "compile": "webpack -d -w",
     "start": "node server/index.js",
     "test": "jest"
   },
@@ -22,6 +22,7 @@
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
+    "axios": "^0.19.2",
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
     "enzyme": "^3.11.0",

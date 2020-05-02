@@ -1,19 +1,41 @@
 import React from 'react';
+import axios from 'axios';
 
 class Look extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: ['one', 'two', 'three', 'four']
+      items: []
     };
+    this.getLookById = this.getLookById.bind(this);
+  }
+
+  componentDidMount() {
+    this.getLookById(1);
+  }
+
+  getLookById(id) {
+    axios.get('/api', {
+      params: {
+        lookId: id
+      }
+    })
+      .then((response) => {
+        console.log('rr', response.data);
+        this.setState({items: response.data});
+      }, ()=>console.log(this.state.items))
+      .catch((err) => {
+        console.log('error', err);
+      });
   }
 
   render() {
     return (
       <div key="look-panel">
-        {this.state.items.map((wheel) => {
+        <h1>{JSON.stringify(this.state.items)}</h1>
+        {this.state.items.map((item) => {
           return (
-            <img src="https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/Footwear/bfa5f26f-acbe-4352-a285-e9ddb3b7d558.jpeg" key={wheel}/>
+            <img src={item.imgurl} key={item.id}/>
           );
         })}
       </div>
