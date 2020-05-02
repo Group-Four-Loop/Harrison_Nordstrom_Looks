@@ -32,7 +32,6 @@ class Look extends React.Component {
   render() {
     return (
       <div key="look-panel">
-        <h1>{JSON.stringify(this.state.items)}</h1>
         {this.state.items.map((item) => {
           return (
             <img src={item.imgurl} key={item.id}/>
