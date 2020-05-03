@@ -1,17 +1,37 @@
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  border: 1px solid black;
+`;
+const Picture = styled.img`
+  border: 1px solid black;
+`;
+
 
 class Look extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: [],
+      currentLook: 1,
     };
     this.getLookById = this.getLookById.bind(this);
+    this.changeLook = this.changeLook.bind(this);
   }
 
   componentDidMount() {
-    this.getLookById(1);
+    this.getLookById(this.state.currentLook);
+  }
+
+  changeLook() {
+    this.setState((prevState) => {
+      return (
+        {currentLook: prevState.currentLook + 1}
+      );
+    });
+    this.getLookById(this.state.currentLook);
   }
 
   getLookById(id) {
@@ -21,9 +41,8 @@ class Look extends React.Component {
       }
     })
       .then((response) => {
-        console.log('rr', response.data);
-        this.setState({items: response.data});
-      }, ()=>console.log(this.state.items))
+        this.setState({items: response.data}, ()=>console.log(this.state.items));
+      })
       .catch((err) => {
         console.log('error', err);
       });
@@ -31,13 +50,14 @@ class Look extends React.Component {
 
   render() {
     return (
-      <div key="look-panel">
+      <Container onClick={()=>{ this.changeLook(); }}>
         {this.state.items.map((item) => {
+          console.log(item);
           return (
-            <img src={item.imgurl} key={item.id}/>
+            <Picture src={item.imgurl} key={item.id} />
           );
         })}
-      </div>
+      </Container>
     );
   }
 }
