@@ -25,7 +25,7 @@ describe('Tests for the Look component', () => {
     //added a comment here!
     expect(wrapper.contains(<a key='one'>blah</a>)).toBe(false);
     // expect(wrapper.contains(<a key='one'>one</a>)).toBe(true);
-    expect(wrapper.find('div').children()).toHaveLength(4);
+    // expect(wrapper.find('div').children()).toHaveLength(4);
   });
 
 });
