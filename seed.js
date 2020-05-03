@@ -23,9 +23,11 @@ let sizes = [
 const randomNum = (length) => {
   return (Math.floor(Math.random() * length));
 };
-let phase1Look_products = [
-  { name: faker.lorem.word(),
-    imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/tops/10b3058c-d317-4813-b50e-c4889f7e88b0.jpeg',
+
+
+for (var x = 1; x <= 30; x ++) {
+  let newTop = { name: faker.lorem.word(),
+    imgUrl: `https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/images/Top/${x}.jpeg`,
     type: 'tops',
     rating: randomNum(5),
     brand: faker.lorem.word(),
@@ -33,29 +35,9 @@ let phase1Look_products = [
     description: faker.lorem.sentence(),
     size: sizes[randomNum(sizes.length)],
     colors: faker.commerce.color(),
-    productUrl: 'https://shop.nordstrom.com/s/5390901'},
-  { name: faker.lorem.word(),
-    imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/tops/2347adee-e5ae-426c-9072-191b10aa9d20.jpeg',
-    type: 'tops',
-    rating: randomNum(5),
-    brand: faker.lorem.word(),
-    price: randomNum(20),
-    description: faker.lorem.sentence(),
-    size: sizes[randomNum(sizes.length)],
-    colors: faker.commerce.color(),
-    productUrl: 'https://shop.nordstrom.com/s/5455576'},
-  { name: faker.lorem.word(),
-    imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/tops/244de193-a8ed-496d-8b58-75039eb3f82b.jpeg',
-    type: 'tops',
-    rating: randomNum(5),
-    brand: faker.lorem.word(),
-    price: randomNum(20),
-    description: faker.lorem.sentence(),
-    size: sizes[randomNum(sizes.length)],
-    colors: faker.commerce.color(),
-    productUrl: 'https://shop.nordstrom.com/s/5390901'},
-  { name: faker.lorem.word(),
-    imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/bottoms/1a082765-9815-418b-9f75-bf7b46a8ba69.jpeg',
+    productUrl: 'https://shop.nordstrom.com/s/5390901'};
+  let newBottom = { name: faker.lorem.word(),
+    imgUrl: `https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/images/Pants/${x}.jpeg`,
     type: 'bottoms',
     rating: randomNum(5),
     brand: faker.lorem.word(),
@@ -63,29 +45,9 @@ let phase1Look_products = [
     description: faker.lorem.sentence(),
     size: sizes[randomNum(sizes.length)],
     colors: faker.commerce.color(),
-    productUrl: 'https://shop.nordstrom.com/s/5349137'},
-  { name: faker.lorem.word(),
-    imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/bottoms/3c5ce604-8aff-4723-9ad4-8b3a72c35432.jpeg',
-    type: 'bottoms',
-    rating: randomNum(5),
-    brand: faker.lorem.word(),
-    price: randomNum(20),
-    description: faker.lorem.sentence(),
-    size: sizes[randomNum(sizes.length)],
-    colors: faker.commerce.color(),
-    productUrl: 'https://shop.nordstrom.com/s/5349137'},
-  { name: faker.lorem.word(),
-    imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/bottoms/5516c918-2c2e-4655-8722-47132709a5a3.jpeg',
-    type: 'bottoms',
-    rating: randomNum(5),
-    brand: faker.lorem.word(),
-    price: randomNum(20),
-    description: faker.lorem.sentence(),
-    size: sizes[randomNum(sizes.length)],
-    colors: faker.commerce.color(),
-    productUrl: 'https://shop.nordstrom.com/s/5349137'},
-  { name: faker.lorem.word(),
-    imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/Footwear/6e467442-26b8-4b9e-a3bb-deaad5954be8.jpeg',
+    productUrl: 'https://shop.nordstrom.com/s/5349137'};
+  let newShoes = { name: faker.lorem.word(),
+    imgUrl: `https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/images/shoes/${x}.jpeg`,
     type: 'footwear',
     rating: randomNum(5),
     brand: faker.lorem.word(),
@@ -93,72 +55,56 @@ let phase1Look_products = [
     description: faker.lorem.sentence(),
     size: sizes[randomNum(sizes.length)],
     colors: faker.commerce.color(),
-    productUrl: 'https://shop.nordstrom.com/s/5408885'},
-  { name: faker.lorem.word(),
-    imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/Footwear/00c27ee5-4b92-4699-a995-0cb997591b62.jpeg',
-    type: 'footwear',
-    rating: randomNum(5),
-    brand: faker.lorem.word(),
-    price: randomNum(20),
-    description: faker.lorem.sentence(),
-    size: sizes[randomNum(sizes.length)],
-    colors: faker.commerce.color(),
-    productUrl: 'https://shop.nordstrom.com/s/5222799'},
-  { name: faker.lorem.word(),
-    imgUrl: 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/Footwear/1f3dd7ac-5abf-435a-905a-3cc39f492f77.jpeg',
-    type: 'footwear',
-    rating: randomNum(5),
-    brand: faker.lorem.word(),
-    price: randomNum(20),
-    description: faker.lorem.sentence(),
-    size: sizes[randomNum(sizes.length)],
-    colors: faker.commerce.color(),
-    productUrl: 'https://shop.nordstrom.com/s/5312575'}
-];
-for (var x = 0; x <= phase1Look_products.length - 1; x++) {
-  db.insertIntoProducts(phase1Look_products[x]);
-  //total 9 products.
+    productUrl: 'https://shop.nordstrom.com/s/5408885'};
+  db.insertIntoProducts(newTop);
+  db.insertIntoProducts(newBottom);
+  db.insertIntoProducts(newShoes);
+}
+for (var i = 1; i <= 9; i++) {
+  let look = {
+    name: faker.commerce.productAdjective() + ' ' + faker.lorem.word(),
+    creator: faker.name.findName(),
+    creatorImgUrl: faker.image.avatar()
+  };
+  db.insertIntoLooks(look);
+  //one look still incomplete
+
+  let looksJunc = {
+    lookId: i,
+    productId: ((i) * 10)
+  };
+  db.insertIntoLooksJunction(looksJunc);
 }
 
-let look = {
-  name: faker.commerce.productAdjective() + ' ' + faker.lorem.word(),
-  creator: faker.name.findName(),
-  creatorImgUrl: faker.image.avatar()
-};
-db.insertIntoLooks(look);
-//one look still incomplete
-
-let looksJunc = {
-  lookId: 1,
-  productId: 1
-};
-db.insertIntoLooksJunction(looksJunc);
-
-let carouselJuncTop = {
-  type: 'tops',
-  lookId: 1,
-  productId1: 1,
-  productId2: 2,
-  productId3: 3
-};
-let carouselJuncBot = {
-  type: 'bottoms',
-  lookId: 1,
-  productId1: 4,
-  productId2: 5,
-  productId3: 6
-};
-let carouselJuncFeet = {
-  type: 'footwear',
-  lookId: 1,
-  productId1: 7,
-  productId2: 8,
-  productId3: 9
-};
-db.insertIntoCarouselJunction(carouselJuncTop);
-db.insertIntoCarouselJunction(carouselJuncBot);
-db.insertIntoCarouselJunction(carouselJuncFeet);
-db.updateLookCarousels(1, {tops: 1, bottoms: 2, footwear: 3});
+for (var j = 10; j <= 70; j += 10) {
+  let carouselJuncTop = {
+    type: 'tops',
+    lookId: j / 10,
+    productId1: j,
+    productId2: j + 3,
+    productId3: j + 6
+  };
+  let carouselJuncBot = {
+    type: 'bottoms',
+    lookId: j / 10,
+    productId1: j + 1,
+    productId2: j + 4,
+    productId3: j + 7
+  };
+  let carouselJuncFeet = {
+    type: 'footwear',
+    lookId: j / 10,
+    productId1: j + 2,
+    productId2: j + 5,
+    productId3: j + 8
+  };
+  db.insertIntoCarouselJunction(carouselJuncTop);
+  db.insertIntoCarouselJunction(carouselJuncBot);
+  db.insertIntoCarouselJunction(carouselJuncFeet);
+}
+for (var v = 1; v <= 9; v++) {
+  db.updateLookCarousels(v, {tops: (v), bottoms: (v) + 1, footwear: (v) + 2});
+}
 /*
 const addItemsToLook = (currentIteration) => {
   let accessoryCount = 0;
