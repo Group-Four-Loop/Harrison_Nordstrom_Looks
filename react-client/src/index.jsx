@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Look from './components/Look.jsx';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class App extends React.Component {
     };
     this.handleClick = this.handleClick.bind(this);
   }
+
 
   handleClick() {
     console.log('click');
