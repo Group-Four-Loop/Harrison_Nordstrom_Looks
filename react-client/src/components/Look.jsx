@@ -5,6 +5,7 @@ import Tops from './Tops.jsx';
 import Bottoms from './Bottoms.jsx';
 import Footwear from './Footwear.jsx';
 
+
 const Container = styled.div`
   border: 1px solid black;
   display:flex;
@@ -100,12 +101,12 @@ class Look extends React.Component {
     });
     return (
 
-      <Container onClick={()=>{ this.changeLook(); }}>
+      <Container>
         <h1>{this.state.currentLook}</h1>
         <LeftPanel>
           {car}
         </LeftPanel>
-        <RightPanel>
+        <RightPanel onClick={()=> { this.changeLook(); }}>
 
         </RightPanel>
       </Container>
