@@ -1,6 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Tops from './Tops.jsx';
+import Bottoms from './Bottoms.jsx';
+import Footwear from './Footwear.jsx';
 
 const Container = styled.div`
   border: 1px solid black;
@@ -21,27 +24,19 @@ const RightPanel = styled.div`
   width:50%;
   right: 0px;
 `;
-const Carousel = styled.div`
-  display:flex;
-  flex-direction:row;
-`;
-const Picture = styled.img`
-  border: 1px solid black;
-  max-width:100px;
-  padding:1rem;
-`;
+
 
 
 class Look extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
       look: {},
       currentLook: 1,
     };
     this.getLookById = this.getLookById.bind(this);
     this.changeLook = this.changeLook.bind(this);
+    this.getUpdatedProps = this.getUpdatedProps.bind(this);
   }
 
   componentDidMount() {
@@ -49,6 +44,7 @@ class Look extends React.Component {
   }
 
   changeLook() {
+    console.log('cl');
     this.setState((prevState) => {
       return (
         {currentLook: prevState.currentLook + 1}
@@ -73,34 +69,39 @@ class Look extends React.Component {
           newLook[products[x].type].push(products[x]);
         }
         let newLooks = Object.values(newLook);
-        console.log('ITS A FUNCTION I SAY', newLooks);
-        this.setState({items: response.data, look: newLook}, ()=>console.log(this.state));
+        this.setState({look: newLooks}, ()=>console.log(this.state));
       })
       .catch((err) => {
         console.log('error', err);
       });
   }
 
+  getUpdatedProps() {
+    return Object.values(this.state.look);
+  }
+
 
   render() {
-    const looks = Object.values(this.state.look);
-    let car;
-    if (looks.length > 0) {
-      car = looks.map((carousel) => {
-        return (
-          <Carousel >
-            {carousel.map((item) => {
-              return (
-                <Picture src={item.imgurl} key={item.id}/>);
-            })}
-          </Carousel>);
-      });
-    } else {
-      car = <div></div>;
-    }
-
+    let looks = this.getUpdatedProps();
+    let car = looks.map(carousel =>{
+      switch (carousel[0].type) {
+      case 'tops':
+        return ( <Tops key={carousel[0].type} items={carousel} />
+        );
+      case 'bottoms':
+        return ( <Bottoms key={carousel[0].type} items={carousel} />
+        );
+      case 'footwear':
+        return ( <Footwear key={carousel[0].type} items={carousel} />
+        );
+      default:
+        return (<div>No Products Found</div>);
+      }
+    });
     return (
+
       <Container onClick={()=>{ this.changeLook(); }}>
+        <h1>{this.state.currentLook}</h1>
         <LeftPanel>
           {car}
         </LeftPanel>
