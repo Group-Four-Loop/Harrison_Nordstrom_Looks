@@ -2,16 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Product = styled.div`
-  margin: 1rem;
+  margin: 5.5rem;
   transition: .5s;
-  overflow:hidden;
+`;
+const Picture = styled.img`
+  width: 347;
+  height: 751;
 `;
 
 const Pictures = (props) => {
-  console.log(props.product.type, props);
   return (
     <Product key={props.product.id} style={props.position}>
-      <img src={`${props.product.imgurl}`}></img>
+      <Picture src={`${props.product.imgurl}`}></Picture>
     </Product>
   );
 };

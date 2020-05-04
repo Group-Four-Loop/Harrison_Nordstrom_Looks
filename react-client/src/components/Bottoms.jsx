@@ -10,20 +10,36 @@ const Row = styled.div`
   padding: 0;
   display:flex;
   align-items:center;
+  justify-content:space-evenly;
   order: 0;
   overflow:hidden;
 `;
 const RightArrow = styled.div`
+  display:flex;
+  align-items:center;
   width:10%;
-  position:absolute;
+  position: absolute;
   height: 80%;
   right:0;
+  opacity: .25;
+  background-color: white;
+  &:hover {
+    font-weight:bold;
+    opacity: .5;
+  }
 `;
 const LeftArrow = styled.div`
-position:absolute;
+  position: absolute;
+  display:flex;
+  align-items:center;
   width:10%;
   height: 80%;
   left:0;
+  background-color: white;
+  &:hover {
+    font-weight:bold;
+    opacity: .5;
+  }
 `;
 
 
@@ -32,7 +48,7 @@ class Carousel extends React.Component {
     super(props);
     this.state = {
       items: props.items,
-      viewport: 0
+      viewport: 150
     };
     this.shiftLeft = this.shiftLeft.bind(this);
     this.shiftRight = this.shiftRight.bind(this);
@@ -45,28 +61,27 @@ class Carousel extends React.Component {
   }
 
   shiftLeft() {
-    console.log('shiftleft')
     let currentView = this.state.viewport;
-    this.setState({viewport: currentView - 100}, ()=>console.log(this.state.viewport))
+    this.setState({viewport: currentView + 150}, ()=>console.log(this.state.viewport))
   }
   shiftRight() {
-    console.log('shiftright')
     let currentView = this.state.viewport;
-    this.setState({viewport: currentView + 100}, ()=>console.log(this.state.viewport))
+    this.setState({viewport: currentView - 150}, ()=>console.log(this.state.viewport))
   }
 
   render() {
     const vp = this.state.viewport;
-    console.log('vp', vp)
+    const leftArrow = '<'
+    const rightArrow = '>'
     return (
       <Row key={this.state.items[0].id} >
-        <LeftArrow onClick={this.shiftLeft}>LEFT</LeftArrow>
+        <LeftArrow onClick={this.shiftLeft}> { leftArrow } </LeftArrow>
         {this.state.items.map((item) => {
           return (
             <Picture key={item.imgurl} product={item} position={{transform: `translateX(${vp}%)`}}/>
           );
         })}
-        <RightArrow onClick={this.shiftRight}>RIGHT</RightArrow>
+        <RightArrow onClick={this.shiftRight}>{rightArrow}</RightArrow>
       </Row>
     );
   }
