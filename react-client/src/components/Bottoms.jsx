@@ -15,7 +15,7 @@ const Row = styled.div`
   order: 0;
   overflow:hidden;
 `;
-
+//NOTE: We set viewport to 215 here (as opposed to 200 as we did on the other carousels) because Pants are generally skinnier photoes.  As such, we need to slightly adjust the starting position of our slide, AND the amount that we increment whenever we 'slide'.
 class Carousel extends React.Component {
   constructor(props) {
     super(props);
@@ -54,6 +54,7 @@ class Carousel extends React.Component {
       marginLeft: '4rem',
       marginRight: '4rem'
     };
+    //NOTE: Similar to our adjustment on starting position, the margins on our Pants must be altered slightly.  This solution isn't ideal.  There is probably a better way to find the exact width of our pants and increment/margin-out the distance according to that.  Sorry future Harrison, that one's your's.
     return (
       <Row key={this.state.items[0].id} >
         <LeftArrow shiftLeft={this.shiftLeft}/>
