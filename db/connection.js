@@ -5,9 +5,22 @@ const client = new Client(config);
 client.connect();
 
 module.exports = {
-
+  //returns a list of items -- all of which belong to a single look
   getItemsByLookId: (lookId, callback) => {
     let sqlQuery = `SELECT * FROM carouselJunc LEFT JOIN products ON (productid1=products.id) OR (productid2=products.id) OR (productid3=products.id) WHERE carouselJunc.lookId=${lookId}`;
+    client.query(sqlQuery, (err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, result);
+      }
+    });
+  },
+
+  //returns all items listed on ANY look where at least one of the carousels contains a given productID
+  getLooksByProductId: (productId, callback) => {
+    console.log('called');
+    let sqlQuery = `SELECT * FROM carouselJunc LEFT JOIN products ON (carouselJunc.productid1=${productId} OR carouselJunc.productid2=${productId} OR carouselJunc.productid3=${productId}) WHERE (carouselJunc.productid1=products.id OR carouselJunc.productid2=products.id OR carouselJunc.productid3=products.id)`;
     client.query(sqlQuery, (err, result) => {
       if (err) {
         callback(err);
