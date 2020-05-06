@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Tops from './Tops.jsx';
 import Bottoms from './Bottoms.jsx';
 import Footwear from './Footwear.jsx';
+import Carousel from './Carousel.jsx';
 
 
 const Container = styled.div`
@@ -42,7 +43,6 @@ class Look extends React.Component {
   }
 
   changeLook() {
-    console.log('cl');
     this.setState((prevState) => {
       return (
         {currentLook: prevState.currentLook + 1}
@@ -70,7 +70,8 @@ class Look extends React.Component {
         this.setState({look: newLooks}, ()=>console.log(this.state));
       })
       .catch((err) => {
-        console.log('error', err);
+        // console.log('error', err);
+        //removed error because it was making it difficult to read my jest tests.  ALSO, I need to learn how to mock this behavior in testing suite
       });
   }
 
@@ -82,24 +83,15 @@ class Look extends React.Component {
   render() {
     let looks = this.getUpdatedProps();
     let car = looks.map(carousel =>{
-      switch (carousel[0].type) {
-      case 'tops':
-        return ( <Tops key={carousel[0].type} items={carousel} />
-        );
-      case 'bottoms':
-        return ( <Bottoms key={carousel[0].type} items={carousel} />
-        );
-      case 'footwear':
-        return ( <Footwear key={carousel[0].type} items={carousel} />
-        );
-      default:
-        return (<div>No Products Found</div>);
-      }
-    });
+      return ( <Carousel key={carousel[0].type} items={carousel} />
+
+      );
+    }
+    );
     return (
       <Container className="app-container">
         <h1>{this.state.currentLook}</h1>
-        <LeftPanel>
+        <LeftPanel className="left-panel">
           {car}
         </LeftPanel>
         <RightPanel onClick={()=> { this.changeLook(); }}>
