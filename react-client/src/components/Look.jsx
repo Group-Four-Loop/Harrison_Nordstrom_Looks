@@ -12,7 +12,6 @@ const Container = styled.div`
 `;
 const LeftPanel = styled.div`
   border: 1px solid black;
-  background-color: #FAEBD7;
   width: 50%;
   left: 0px;
   display:flex;
@@ -25,8 +24,6 @@ const RightPanel = styled.div`
   width:50%;
   right: 0px;
 `;
-
-
 
 class Look extends React.Component {
   constructor(props) {
@@ -100,8 +97,7 @@ class Look extends React.Component {
       }
     });
     return (
-
-      <Container>
+      <Container className="app-container">
         <h1>{this.state.currentLook}</h1>
         <LeftPanel>
           {car}
