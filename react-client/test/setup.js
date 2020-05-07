@@ -1,5 +1,6 @@
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import 'regenerator-runtime/runtime';
 
 //call Enzyme's configure method and pass an object
 Enzyme.configure({adapter: new Adapter() });

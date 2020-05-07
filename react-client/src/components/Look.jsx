@@ -1,9 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Tops from './Tops.jsx';
-import Bottoms from './Bottoms.jsx';
-import Footwear from './Footwear.jsx';
+import Carousel from './Carousel.jsx';
 
 
 const Container = styled.div`
@@ -12,7 +10,6 @@ const Container = styled.div`
 `;
 const LeftPanel = styled.div`
   border: 1px solid black;
-  background-color: #FAEBD7;
   width: 50%;
   left: 0px;
   display:flex;
@@ -25,8 +22,6 @@ const RightPanel = styled.div`
   width:50%;
   right: 0px;
 `;
-
-
 
 class Look extends React.Component {
   constructor(props) {
@@ -45,7 +40,6 @@ class Look extends React.Component {
   }
 
   changeLook() {
-    console.log('cl');
     this.setState((prevState) => {
       return (
         {currentLook: prevState.currentLook + 1}
@@ -73,7 +67,8 @@ class Look extends React.Component {
         this.setState({look: newLooks}, ()=>console.log(this.state));
       })
       .catch((err) => {
-        console.log('error', err);
+        // console.log('error', err);
+        //removed error because it was making it difficult to read my jest tests.  ALSO, I need to learn how to mock this behavior in testing suite
       });
   }
 
@@ -85,28 +80,18 @@ class Look extends React.Component {
   render() {
     let looks = this.getUpdatedProps();
     let car = looks.map(carousel =>{
-      switch (carousel[0].type) {
-      case 'tops':
-        return ( <Tops key={carousel[0].type} items={carousel} />
-        );
-      case 'bottoms':
-        return ( <Bottoms key={carousel[0].type} items={carousel} />
-        );
-      case 'footwear':
-        return ( <Footwear key={carousel[0].type} items={carousel} />
-        );
-      default:
-        return (<div>No Products Found</div>);
-      }
-    });
+      let order = (carousel[0].type === 'tops') ? -1 : (carousel[0].type === 'bottoms') ? 0 : 1;
+      return ( <Carousel key={carousel[0].type} items={carousel} style={{'order': order}}/>
+      );
+    }
+    );
     return (
-
-      <Container>
+      <Container className="app-container">
         <h1>{this.state.currentLook}</h1>
-        <LeftPanel>
+        <LeftPanel className="left-panel">
           {car}
         </LeftPanel>
-        <RightPanel onClick={()=> { this.changeLook(); }}>
+        <RightPanel className="right-panel" onClick={()=> { this.changeLook(); }}>
 
         </RightPanel>
       </Container>
