@@ -1,9 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Tops from './Tops.jsx';
-import Bottoms from './Bottoms.jsx';
-import Footwear from './Footwear.jsx';
 import Carousel from './Carousel.jsx';
 
 
@@ -84,7 +81,6 @@ class Look extends React.Component {
     let looks = this.getUpdatedProps();
     let car = looks.map(carousel =>{
       return ( <Carousel key={carousel[0].type} items={carousel} />
-
       );
     }
     );
