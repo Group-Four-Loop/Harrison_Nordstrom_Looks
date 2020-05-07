@@ -39,7 +39,6 @@ class Carousel extends React.Component {
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
     let newPicPosition = (this.props.items[0].type === 'bottoms') ? 215 : 200;
-    console.log('updated', typeof newPicPosition);
     if (this.props.items !== prevProps.items) {
       this.setState({items: this.props.items, picturePosition: newPicPosition});
     }
@@ -72,9 +71,8 @@ class Carousel extends React.Component {
       location.marginLeft = '4rem';
       location.marginRight = '4.5rem';
     }
-    console.log(location);
     return (
-      <Row key={this.state.items[0].id} >
+      <Row key={this.state.items[0].id} style={this.props.style}>
         <LeftArrow shiftLeft={this.shiftLeft} className='left-arrow'/>
         {this.state.items.map((item) => {
           return (

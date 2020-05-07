@@ -80,7 +80,8 @@ class Look extends React.Component {
   render() {
     let looks = this.getUpdatedProps();
     let car = looks.map(carousel =>{
-      return ( <Carousel key={carousel[0].type} items={carousel} />
+      let order = (carousel[0].type === 'tops') ? -1 : (carousel[0].type === 'bottoms') ? 0 : 1;
+      return ( <Carousel key={carousel[0].type} items={carousel} style={{'order': order}}/>
       );
     }
     );
@@ -90,7 +91,7 @@ class Look extends React.Component {
         <LeftPanel className="left-panel">
           {car}
         </LeftPanel>
-        <RightPanel onClick={()=> { this.changeLook(); }}>
+        <RightPanel className="right-panel" onClick={()=> { this.changeLook(); }}>
 
         </RightPanel>
       </Container>
