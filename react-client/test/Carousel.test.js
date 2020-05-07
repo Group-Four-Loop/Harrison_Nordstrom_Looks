@@ -77,6 +77,8 @@ describe('The Carousel', () => {
     expect(wrapper.state().picturePosition).toEqual(0);
     RightArrow.simulate('click');
     expect(wrapper.state().picturePosition).toEqual(-200);
+    RightArrow.simulate('click');
+    expect(wrapper.state().picturePosition).toEqual(-200);
     LeftArrow.simulate('click');
     expect(wrapper.state().picturePosition).toEqual(0);
     LeftArrow.simulate('click');
@@ -140,11 +142,13 @@ describe('The Carousel', () => {
   ];
 
   it ('clicks left and updates state - size 215', () => {
-    let wrapper = mount(<Carousel items={bottoms} picturePosition={215}/>);
+    let wrapper = mount(<Carousel items={bottoms} picturePosition={215} style={{order: 0}}/>);
     let RightArrow = wrapper.find('.right-arrow');
     let LeftArrow = wrapper.find('.left-arrow');
     RightArrow.simulate('click');
     expect(wrapper.state().picturePosition).toEqual(0);
+    RightArrow.simulate('click');
+    expect(wrapper.state().picturePosition).toEqual(-215);
     RightArrow.simulate('click');
     expect(wrapper.state().picturePosition).toEqual(-215);
     LeftArrow.simulate('click');
@@ -155,5 +159,16 @@ describe('The Carousel', () => {
     expect(wrapper.state().picturePosition).toEqual(215);
   });
 
+  it('assigns an order to child carousels', () => {
+    let wrapper = mount(<Carousel items={bottoms} picturePosition={215} style={{order: 0}}/>);
+    expect(wrapper.prop('style')).toEqual({'order': 0});
+  });
+
+  it('successfully updates when new items are passed', () => {
+    let wrapper = mount(<Carousel items={bottoms} picturePosition={215} style={{order: 0}}/>);
+    expect(wrapper.prop('style')).toEqual({'order': 0});
+    wrapper.setProps({items: items, style: {order: -1}});
+    expect(wrapper.prop('style')).toEqual({'order': -1});
+  });
 
 });

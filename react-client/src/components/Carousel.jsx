@@ -33,7 +33,6 @@ class Carousel extends React.Component {
     if (this.state.type === 'bottoms') {
       this.setState({picturePosition: 215});
     }
-    console.log('mount', this.state);
   }
 
   componentDidUpdate(prevProps) {
@@ -47,13 +46,13 @@ class Carousel extends React.Component {
   shiftLeft() {
     let currentView = this.state.picturePosition;
     if (currentView !== this.state.size) {
-      this.setState({picturePosition: currentView + this.state.size}, ()=>console.log(this.state.picturePosition));
+      this.setState({picturePosition: currentView + this.state.size});
     }
   }
   shiftRight() {
     let currentView = this.state.picturePosition;
     if (currentView !== -this.state.size) {
-      this.setState({picturePosition: currentView - this.state.size}, ()=>console.log(this.state.picturePosition));
+      this.setState({picturePosition: currentView - this.state.size});
     }
   }
 
@@ -76,7 +75,7 @@ class Carousel extends React.Component {
         <LeftArrow shiftLeft={this.shiftLeft} className='left-arrow'/>
         {this.state.items.map((item) => {
           return (
-            <Picture key={item.imgurl} product={item} position={location}/>
+            <Picture key={item.imgurl + item.id} product={item} position={location}/>
           );
         })}
         <RightArrow className='right-arrow' shiftRight={this.shiftRight}/>
