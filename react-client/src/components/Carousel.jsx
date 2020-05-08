@@ -11,7 +11,6 @@ const Row = styled.div`
   display:flex;
   align-items:center;
   justify-content:space-around;
-  order: -1;
   overflow:hidden;
 `;
 
@@ -37,8 +36,9 @@ class Carousel extends React.Component {
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    let newPicPosition = (this.props.items[0].type === 'bottoms') ? 215 : 200;
+
     if (this.props.items !== prevProps.items) {
+      let newPicPosition = (this.props.type === 'bottoms') ? 215 : 200;
       this.setState({items: this.props.items, picturePosition: newPicPosition});
     }
   }
@@ -68,14 +68,14 @@ class Carousel extends React.Component {
 
     if (this.state.type === 'bottoms') {
       location.marginLeft = '4rem';
-      location.marginRight = '4.5rem';
+      location.marginRight = '4rem';
     }
     return (
       <Row key={this.state.items[0].id} style={this.props.style}>
         <LeftArrow shiftLeft={this.shiftLeft} className='left-arrow'/>
         {this.state.items.map((item) => {
           return (
-            <Picture key={item.imgurl + item.id} product={item} position={location}/>
+            <Picture key={item.imgurl + item.id} product={item} position={location} selectProduct={this.props.selectFunc}/>
           );
         })}
         <RightArrow className='right-arrow' shiftRight={this.shiftRight}/>

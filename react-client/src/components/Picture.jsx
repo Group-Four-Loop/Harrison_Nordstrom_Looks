@@ -15,7 +15,7 @@ const Picture = styled.img`
 const Pictures = (props) => {
   return (
     <Product key={props.product.id} style={props.position}>
-      <Picture src={`${props.product.imgurl}`}></Picture>
+      <Picture src={`${props.product.imgurl}`} onClick={() => { props.selectProduct(props.product); }}></Picture>
       <div>{props.product.name}</div>
       <strong>{`$${props.product.price}`}</strong>
     </Product>

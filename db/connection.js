@@ -10,8 +10,10 @@ module.exports = {
     let sqlQuery = `SELECT * FROM carouselJunc LEFT JOIN products ON (productid1=products.id) OR (productid2=products.id) OR (productid3=products.id) WHERE carouselJunc.lookId=${lookId}`;
     client.query(sqlQuery, (err, result) => {
       if (err) {
+        console.log('error in query');
         callback(err);
       } else {
+        console.log('successful query');
         callback(null, result);
       }
     });
