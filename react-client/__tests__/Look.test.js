@@ -11,32 +11,7 @@ describe('The Looks Component', () => {
   });
 
   test('should invoke getLookById on componentDidMount', () => {
-    // jest.mock('axios', () => {
-    //   const products = [
-    //     {
-    //       'id': 10,
-    //       'type': 'tops',
-    //       'lookid': 1,
-    //       'productid1': 10,
-    //       'productid2': 13,
-    //       'productid3': 16,
-    //       'name': 'modi',
-    //       'imgurl': 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/images/Top/4.jpeg',
-    //       'rating': '2.00',
-    //       'brand': 'temporibus',
-    //       'price': '9.00',
-    //       'description': 'Incidunt eligendi veritatis et velit.',
-    //       'size': 'XS',
-    //       'color': 'undefined',
-    //       'producturl': 'https://shop.nordstrom.com/s/5390901'
-    //     }
-    //   ];
-
-    //   return {
-    //     get: jest.fn(() => Promise.resolve(products)),
-    //   };
-    // });
-    const mock = jest.fn(jest.mock('axios', () => {
+    jest.mock('axios', () => {
       const products = [
         {
           'id': 10,
@@ -60,8 +35,10 @@ describe('The Looks Component', () => {
       return {
         get: jest.fn(() => Promise.resolve(products)),
       };
-    }));
-    wrapper.instance().getLookById = mock;
+    });
+    // jest.mock('../Look');
+    const mock = jest.fn();
+    wrapper.instance().startOffSmooth = mock;
     wrapper.instance().forceUpdate();
     wrapper
       .instance()

@@ -1,26 +1,43 @@
 import React from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import styled from 'styled-components';
 import Carousel from './Carousel.jsx';
-
+import model from '../models/Looks.js';
+import ProductView from './ProductView.jsx';
+import Empty from './EmptyProductView.jsx';
 
 const Container = styled.div`
-  border: 1px solid black;
   display:flex;
+  justify-content: space-between;
 `;
 const LeftPanel = styled.div`
-  border: 1px solid black;
-  width: 50%;
+  border: 1px solid grey;
+  width: 38%;
   left: 0px;
   display:flex;
   flex-direction: column;
   align-items: center;
 `;
+const LookName = styled.h2`
+  height: .25rem;
+`;
+const LookWindow = styled.div`
+  border: 1px solid grey;
+  width: 100%;
+  left: 0px;
+  display:flex;
+  flex-direction: column;
+  margin: 1rem;
+  align-items: center;`;
 const RightPanel = styled.div`
-  border: 1px solid black;
-  background-color: #F0F8FF;
-  width:50%;
+  display: flex;
+  flex-direction: column;
+  width:45%;
   right: 0px;
+  align-content: center;
+`;
+const ColumnFiller = styled.div`
+width: 10%;
 `;
 
 class Look extends React.Component {
@@ -29,14 +46,16 @@ class Look extends React.Component {
     this.state = {
       look: {},
       currentLook: 1,
+      selectedProduct: null
     };
     this.getLookById = this.getLookById.bind(this);
     this.changeLook = this.changeLook.bind(this);
     this.getUpdatedProps = this.getUpdatedProps.bind(this);
+    this.updateCurrentlySelectedProduct = this.updateCurrentlySelectedProduct.bind(this);
   }
 
   componentDidMount() {
-    this.getLookById(this.state.currentLook);
+    this.getLookById(1);
   }
 
   changeLook() {
@@ -48,14 +67,37 @@ class Look extends React.Component {
     this.getLookById(this.state.currentLook);
   }
 
-  getLookById(id) {
-    axios.get('/api', {
-      params: {
-        lookId: id
-      }
-    })
+  //THIS NEEDS WORK!! Need to refactor such that when multiple looks are returned, we only display one. the rest go to a separate look carousel. this is actually a pretty big refactor
+  getLooksByProductId(productId) {
+    model.getLooksByProductId(productId)
       .then((response) => {
-        let products = response.data;
+        // let products = response.data;
+        let products = response;
+        let newLook = {};
+        for (var x = 0; x <= products.length - 1; x++) {
+          if (!newLook[products[x].type]) {
+            newLook[products[x].type] = [];
+          }
+          newLook[products[x].type].push(products[x]);
+        }
+        let newLooks = Object.values(newLook);
+        this.setState({look: newLooks}, ()=>console.log(this.state));
+      })
+      .catch((err) => {
+      });
+  }
+
+  getLookById(id) {
+    // axios.get('/api', {
+    //   params: {
+    //     lookId: id
+    //   }
+    // })
+    model.getLooksById(id)
+      .then((response) => {
+        console.log('RESPONSE', response);
+        // let products = response.data;
+        let products = response;
         let newLook = {};
         for (var x = 0; x <= products.length - 1; x++) {
           if (!newLook[products[x].type]) {
@@ -76,24 +118,34 @@ class Look extends React.Component {
     return Object.values(this.state.look);
   }
 
+  updateCurrentlySelectedProduct(product) {
+    this.setState({selectedProduct: product});
+  }
 
   render() {
     let looks = this.getUpdatedProps();
-    let car = looks.map(carousel =>{
+
+    let productCarousels = looks.map(carousel => {
       let order = (carousel[0].type === 'tops') ? -1 : (carousel[0].type === 'bottoms') ? 0 : 1;
-      return ( <Carousel key={carousel[0].type} items={carousel} style={{'order': order}}/>
+      return ( <Carousel key={carousel[0].type} items={carousel} style={{'order': order}} selectFunc={this.updateCurrentlySelectedProduct}/>
       );
-    }
-    );
+    });
+
     return (
       <Container className="app-container">
-        <h1>{this.state.currentLook}</h1>
         <LeftPanel className="left-panel">
-          {car}
+          <LookName onClick={()=> { this.changeLook(); }}>{this.state.currentLook}
+          </LookName>
+          <LookWindow>
+            {productCarousels}
+          </LookWindow>
         </LeftPanel>
-        <RightPanel className="right-panel" onClick={()=> { this.changeLook(); }}>
-
+        <RightPanel className="right-panel">
+          {(this.state.selectedProduct) ?
+            <ProductView product={this.state.selectedProduct}/> : <Empty/>
+          }
         </RightPanel>
+        <ColumnFiller/>
       </Container>
     );
   }

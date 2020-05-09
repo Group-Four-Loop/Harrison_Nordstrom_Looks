@@ -10,6 +10,7 @@ const Arrow = styled.div`
   right:0;
   opacity:1%;
   font-size:larger;
+  z-index:0;
   &:hover {
     font-weight:bold;
     opacity: .5;

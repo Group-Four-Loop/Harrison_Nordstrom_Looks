@@ -21,11 +21,25 @@ app.get('/api', (req, res) => {
   });
 });
 
-app.get('/api/looks', (req, res) => {
-  db.getLooksByProductId(req.query.productId, (err, result) => {
+//comment
+app.get('/api/models', (req, res) => {
+  console.log(req.query);
+  db.getItemsByLookId(req.query.lookId, (err, result) => {
     if (err) {
       res.status(400).send(err);
     } else {
+      res.send(result.rows);
+    }
+  });
+});
+
+app.get('/api/looks', (req, res) => {
+  db.getLooksByProductId(req.query.productId, (err, result) => {
+    if (err) {
+      console.log('look');
+      res.status(400).send(err);
+    } else {
+      console.log('look');
       res.send(result.rows);
     }
   });
