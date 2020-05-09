@@ -18,8 +18,25 @@ const LeftPanel = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const LookName = styled.h2`
-  height: .25rem;
+const LookHeader = styled.div`
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 9%;
+  font-family: Lato, sans-serif;
+`;
+const LookName = styled.div`
+  font-size: large;
+  font-weight: 200;
+  text-transform: uppercase;
+  margin-top: .5rem;
+  margin-bottom: .25rem;
+`;
+const LookCreator = styled.div`
+  font-size:smaller;
+  font-weight:200;
+  text-decoration: underline;
 `;
 const LookWindow = styled.div`
   border: 1px solid grey;
@@ -44,8 +61,9 @@ class Look extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      relatedLooks: [],
       look: {},
-      currentLook: 1,
+      currentLook: 0,
       selectedProduct: null
     };
     this.getLookById = this.getLookById.bind(this);
@@ -55,7 +73,7 @@ class Look extends React.Component {
   }
 
   componentDidMount() {
-    this.getLookById(1);
+    this.getLooksByProductId(10);
   }
 
   changeLook() {
@@ -73,6 +91,7 @@ class Look extends React.Component {
       .then((response) => {
         // let products = response.data;
         let products = response;
+        console.log('rr', response);
         let newLook = {};
         for (var x = 0; x <= products.length - 1; x++) {
           if (!newLook[products[x].type]) {
@@ -81,7 +100,7 @@ class Look extends React.Component {
           newLook[products[x].type].push(products[x]);
         }
         let newLooks = Object.values(newLook);
-        this.setState({look: newLooks}, ()=>console.log(this.state));
+        this.setState({look: newLooks});
       })
       .catch((err) => {
       });
@@ -124,7 +143,6 @@ class Look extends React.Component {
 
   render() {
     let looks = this.getUpdatedProps();
-
     let productCarousels = looks.map(carousel => {
       let order = (carousel[0].type === 'tops') ? -1 : (carousel[0].type === 'bottoms') ? 0 : 1;
       return ( <Carousel key={carousel[0].type} items={carousel} style={{'order': order}} selectFunc={this.updateCurrentlySelectedProduct}/>
@@ -134,8 +152,19 @@ class Look extends React.Component {
     return (
       <Container className="app-container">
         <LeftPanel className="left-panel">
-          <LookName onClick={()=> { this.changeLook(); }}>{this.state.currentLook}
-          </LookName>
+          {this.state.look[0] ?
+            <LookHeader className="look-name" onClick={()=> { this.changeLook(); }}>
+              <LookName>
+                {this.state.look[0][0].lookName}
+                <br/>
+              </LookName>
+              <LookCreator>
+                {this.state.look[0][0].creatorImgUrl}
+                {this.state.look[0][0].lookCreator}
+              </LookCreator>
+            </LookHeader> :
+            <LookHeader className="look-name" onClick={()=> { this.changeLook(); }}/>
+          }
           <LookWindow>
             {productCarousels}
           </LookWindow>
