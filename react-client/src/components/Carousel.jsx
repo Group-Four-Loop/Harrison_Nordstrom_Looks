@@ -18,28 +18,29 @@ const Row = styled.div`
 class Carousel extends React.Component {
   constructor(props) {
     super(props);
-    let sizing = (props.items[0].type === 'bottoms') ? 199.5 : 199.5;
+    // let sizing = (props.items[0].type === 'bottoms') ? 199.5 : 199.5;
     this.state = {
       items: props.items,
       type: props.items[0].type,
       //set viewport (or the position of currently displayed photo (will rename later) -- we want to show left-most photo so we need to shift our 'photoslide' to the right)
       picturePosition: 199.5,
-      size: sizing
+      size: 199.5
     };
     this.shiftLeft = this.shiftLeft.bind(this);
     this.shiftRight = this.shiftRight.bind(this);
   }
   componentDidMount() {
-    if (this.state.type === 'bottoms') {
-      this.setState({picturePosition: 199.5});
-    }
+    // if (this.state.type === 'bottoms') {
+    //   this.setState({picturePosition: 199.5});
+    // }
   }
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
 
     if (this.props.items !== prevProps.items) {
-      let newPicPosition = (this.props.type === 'bottoms') ? 199.5 : 199.5;
+      // let newPicPosition = (this.props.type === 'bottoms') ? 199.5 : 199.5;
+      let newPicPosition = 199.5;
       this.setState({items: this.props.items, picturePosition: newPicPosition});
     }
   }

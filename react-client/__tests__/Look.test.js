@@ -38,7 +38,7 @@ describe('The Looks Component', () => {
     });
     // jest.mock('../Look');
     const mock = jest.fn();
-    wrapper.instance().startOffSmooth = mock;
+    wrapper.instance().getLookById = mock;
     wrapper.instance().forceUpdate();
     wrapper
       .instance()
@@ -93,7 +93,7 @@ describe('The Looks Component', () => {
   });
 
   it('changes the look when clicked', () => {
-    wrapper.find('.right-panel').simulate('click');
+    wrapper.find('.look-name').simulate('click');
     expect(wrapper.state().currentLook).toEqual(2);
   });
 });

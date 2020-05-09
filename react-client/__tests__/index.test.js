@@ -13,7 +13,7 @@ describe('Sets the App up properly', () => {
   it('Sets up the Look component properly', () => {
     let wrapper = shallow(<Look/>);
     //toEqual - all have same properties, not exact same obj
-    expect(wrapper.state()).toEqual({look: {}, currentLook: 1});
+    expect(wrapper.state()).toEqual({look: {}, currentLook: 1, selectedProduct: null});
   });
 
 });

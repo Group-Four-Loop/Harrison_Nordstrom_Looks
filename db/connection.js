@@ -32,6 +32,18 @@ module.exports = {
     });
   },
 
+  getLookDetails: (LookIdString, callback) => {
+    console.log('names', LookIdString);
+    let query = `SELECT * FROM looks WHERE id IN (${LookIdString})`;
+    client.query(query, (err, result) => {
+      if (err) {
+        callback(err);
+      } else {
+        callback(null, result);
+      }
+    });
+  },
+
   getAllItems: (callback) => {
     client.query('select * from products', (err, result) => {
       if (err) {
