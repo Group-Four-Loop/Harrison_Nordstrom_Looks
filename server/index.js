@@ -51,7 +51,6 @@ app.get('/api/looks', (req, res) => {
           console.log('nameError', e);
           res.status(400).send(e);
         } else {
-          //r.rows will contain look records
           console.log ('r');
           for (var i = 0; i <= r.rows.length - 1; i++) {
             result.rows.map((product) => {
