@@ -3,13 +3,13 @@ CREATE DATABASE nordstrom;
 
 CREATE TABLE products(
   id                   SERIAL               NOT NULL,
-  name                 VARCHAR(255)         NOT NULL,
+  name                 VARCHAR(1000)         NOT NULL,
   imgUrl               VARCHAR(255)         NOT NULL,
   type                 VARCHAR(25)          NOT NULL,
   rating               DECIMAL(18,2)        NOT NULL,
   brand                VARCHAR(255)         NOT NULL,
   price                DECIMAL(18,2)        NOT NULL,
-  description          VARCHAR(255)         NOT NULL,
+  description          VARCHAR(1000)         NOT NULL,
   size                 VARCHAR(255)         NOT NULL,
   color                VARCHAR(255)         NOT NULL,
   productUrl           VARCHAR(255)         NOT NULL,
