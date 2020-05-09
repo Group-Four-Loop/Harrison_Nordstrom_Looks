@@ -36,10 +36,8 @@ app.get('/api/models', (req, res) => {
 app.get('/api/looks', (req, res) => {
   db.getLooksByProductId(req.query.productId, (err, result) => {
     if (err) {
-      console.log('lookError');
       res.status(400).send(err);
     } else {
-      console.log('lookSuccess');
       let lookIds = [];
       for (var x = 0; x <= result.rows.length - 1; x++) {
         if (!lookIds.includes(result.rows[x])) {
@@ -48,10 +46,8 @@ app.get('/api/looks', (req, res) => {
       }
       db.getLookDetails(lookIds, (e, r) => {
         if (e) {
-          console.log('nameError', e);
           res.status(400).send(e);
         } else {
-          console.log ('r');
           for (var i = 0; i <= r.rows.length - 1; i++) {
             result.rows.map((product) => {
               if (product.lookid === r.rows[i].id) {
