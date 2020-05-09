@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import Carousel from './Carousel.jsx';
 import model from '../models/Looks.js';
 import ProductView from './ProductView.jsx';
+import Empty from './EmptyProductView.jsx';
 
 const Container = styled.div`
-  border: 1px solid black;
   display:flex;
   justify-content: space-between;
 `;
 const LeftPanel = styled.div`
-  border: 1px solid black;
+  border: 1px solid grey;
   width: 38%;
   left: 0px;
   display:flex;
@@ -22,7 +22,7 @@ const LookName = styled.h2`
   height: .25rem;
 `;
 const LookWindow = styled.div`
-  border: 1px solid black;
+  border: 1px solid grey;
   width: 100%;
   left: 0px;
   display:flex;
@@ -30,8 +30,11 @@ const LookWindow = styled.div`
   margin: 1rem;
   align-items: center;`;
 const RightPanel = styled.div`
+  display: flex;
+  flex-direction: column;
   width:45%;
   right: 0px;
+  align-content: center;
 `;
 const ColumnFiller = styled.div`
 width: 10%;
@@ -116,48 +119,33 @@ class Look extends React.Component {
   }
 
   updateCurrentlySelectedProduct(product) {
-    console.log('SELECTED:', product);
     this.setState({selectedProduct: product});
   }
 
   render() {
     let looks = this.getUpdatedProps();
-    let car = looks.map(carousel =>{
+
+    let productCarousels = looks.map(carousel => {
       let order = (carousel[0].type === 'tops') ? -1 : (carousel[0].type === 'bottoms') ? 0 : 1;
       return ( <Carousel key={carousel[0].type} items={carousel} style={{'order': order}} selectFunc={this.updateCurrentlySelectedProduct}/>
       );
-    }
-    );
-    let productViewTest = {
-      'id': 10,
-      'type': 'tops',
-      'lookid': 1,
-      'productid1': 10,
-      'productid2': 13,
-      'productid3': 16,
-      'name': 'modi',
-      'imgurl': 'https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/images/Top/4.jpeg',
-      'rating': '2.00',
-      'brand': 'temporibus',
-      'price': '9.00',
-      'description': 'Incidunt eligendi veritatis et velit.',
-      'size': 'XS',
-      'color': 'undefined',
-      'producturl': 'https://shop.nordstrom.com/s/5390901'
-    };
+    });
+
     return (
       <Container className="app-container">
         <LeftPanel className="left-panel">
           <LookName onClick={()=> { this.changeLook(); }}>{this.state.currentLook}
           </LookName>
           <LookWindow>
-            {car}
+            {productCarousels}
           </LookWindow>
         </LeftPanel>
         <RightPanel className="right-panel">
-          <ProductView product={this.state.selectedProduct || productViewTest}></ProductView>
+          {(this.state.selectedProduct) ?
+            <ProductView product={this.state.selectedProduct}/> : <Empty/>
+          }
         </RightPanel>
-        <ColumnFiller></ColumnFiller>
+        <ColumnFiller/>
       </Container>
     );
   }

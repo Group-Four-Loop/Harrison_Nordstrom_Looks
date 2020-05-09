@@ -6,6 +6,7 @@ import LeftArrow from './LeftArrow.jsx';
 
 const Row = styled.div`
   position: relative;
+  margin-bottom: 1rem;
   width:30%;
   box-sizing: border-box;
   display:flex;
@@ -17,12 +18,12 @@ const Row = styled.div`
 class Carousel extends React.Component {
   constructor(props) {
     super(props);
-    let sizing = (props.items[0].type === 'bottoms') ? 215 : 200;
+    let sizing = (props.items[0].type === 'bottoms') ? 199.5 : 199.5;
     this.state = {
       items: props.items,
       type: props.items[0].type,
       //set viewport (or the position of currently displayed photo (will rename later) -- we want to show left-most photo so we need to shift our 'photoslide' to the right)
-      picturePosition: 200,
+      picturePosition: 199.5,
       size: sizing
     };
     this.shiftLeft = this.shiftLeft.bind(this);
@@ -30,7 +31,7 @@ class Carousel extends React.Component {
   }
   componentDidMount() {
     if (this.state.type === 'bottoms') {
-      this.setState({picturePosition: 215});
+      this.setState({picturePosition: 199.5});
     }
   }
 
@@ -38,7 +39,7 @@ class Carousel extends React.Component {
     // Typical usage (don't forget to compare props):
 
     if (this.props.items !== prevProps.items) {
-      let newPicPosition = (this.props.type === 'bottoms') ? 215 : 200;
+      let newPicPosition = (this.props.type === 'bottoms') ? 199.5 : 199.5;
       this.setState({items: this.props.items, picturePosition: newPicPosition});
     }
   }
@@ -66,10 +67,10 @@ class Carousel extends React.Component {
       marginRight: '4.5rem'
     };
 
-    if (this.state.type === 'bottoms') {
-      location.marginLeft = '4rem';
-      location.marginRight = '4rem';
-    }
+    // if (this.state.type === 'bottoms') {
+    //   location.marginLeft = '4rem';
+    //   location.marginRight = '4rem';
+    // }
     return (
       <Row key={this.state.items[0].id} style={this.props.style}>
         <LeftArrow shiftLeft={this.shiftLeft} className='left-arrow'/>
@@ -78,6 +79,7 @@ class Carousel extends React.Component {
             <Picture key={item.imgurl + item.id} product={item} position={location} selectProduct={this.props.selectFunc}/>
           );
         })}
+
         <RightArrow className='right-arrow' shiftRight={this.shiftRight}/>
       </Row>
     );

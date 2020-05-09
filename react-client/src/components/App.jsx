@@ -9,6 +9,8 @@ const Container = styled.div`
 const ComponentTitle = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
+  font-family: Lato, sans-serif;
+  font-weight: bold;
 `;
 
 const App = () => {
