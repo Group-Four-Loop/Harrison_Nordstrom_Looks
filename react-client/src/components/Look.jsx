@@ -66,7 +66,7 @@ class Look extends React.Component {
       currentLook: 0,
       selectedProduct: null
     };
-    this.getLookById = this.getLookById.bind(this);
+    // this.getLookById = this.getLookById.bind(this);
     this.changeLook = this.changeLook.bind(this);
     this.updateCurrentlySelectedProduct = this.updateCurrentlySelectedProduct.bind(this);
   }
