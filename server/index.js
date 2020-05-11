@@ -21,7 +21,6 @@ app.get('/api', (req, res) => {
   });
 });
 
-//comment
 app.get('/api/models', (req, res) => {
   console.log(req.query);
   db.getItemsByLookId(req.query.lookId, (err, result) => {

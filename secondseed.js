@@ -34,7 +34,7 @@ for (var x = 1; x <= 30; x ++) {
     price: randomNum(200),
     description: faker.lorem.sentences(),
     size: sizes[randomNum(sizes.length)],
-    colors: faker.internet.color(),
+    colors: faker.commerce.color(),
     productUrl: 'https://shop.nordstrom.com/s/5390901'};
   let newBottom = { name: faker.lorem.sentence(),
     imgUrl: `https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/images/Pants/${x}.jpeg`,
@@ -44,7 +44,7 @@ for (var x = 1; x <= 30; x ++) {
     price: randomNum(200),
     description: faker.lorem.sentences(),
     size: sizes[randomNum(sizes.length)],
-    colors: faker.internet.color(),
+    colors: faker.commerce.color(),
     productUrl: 'https://shop.nordstrom.com/s/5349137'};
   let newShoes = { name: faker.lorem.sentence(),
     imgUrl: `https://fec-fourloop-looks.s3-us-west-1.amazonaws.com/images/shoes/${x}.jpeg`,
@@ -54,7 +54,7 @@ for (var x = 1; x <= 30; x ++) {
     price: randomNum(200),
     description: faker.lorem.sentences(),
     size: sizes[randomNum(sizes.length)],
-    colors: faker.internet.color(),
+    colors: faker.commerce.color(),
     productUrl: 'https://shop.nordstrom.com/s/5408885'};
   db.insertIntoProducts(newTop);
   db.insertIntoProducts(newBottom);

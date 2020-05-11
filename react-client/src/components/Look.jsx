@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 import styled from 'styled-components';
 import Carousel from './Carousel.jsx';
 import model from '../models/Looks.js';
@@ -14,7 +13,7 @@ const Container = styled.div`
 `;
 const LeftPanel = styled.div`
   border: 1px solid grey;
-  width: 28%;
+  width: 33%;
   left: 10%;
   display:flex;
   flex-direction: column;
@@ -58,6 +57,9 @@ const RightPanel = styled.div`
 const ColumnFiller = styled.div`
   width: 10%;
 `;
+const ColumnFillerMini = styled.div`
+  width: 5%;
+`;
 
 class Look extends React.Component {
   constructor(props) {
@@ -72,7 +74,6 @@ class Look extends React.Component {
       selectedProduct: null,
       displayModal: false
     };
-    // this.getLookById = this.getLookById.bind(this);
     this.changeLook = this.changeLook.bind(this);
     this.updateCurrentlySelectedProduct = this.updateCurrentlySelectedProduct.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -84,16 +85,19 @@ class Look extends React.Component {
 
   toggleModal() {
     const modalState = this.state.displayModal;
-    this.setState({displayModal: !modalState}, () => { console.log('toggletoggle', this.state); });
+    this.setState({displayModal: !modalState});
   }
 
   changeLook() {
-    this.setState((prevState) => {
-      return (
-        {currentLook: prevState.currentLook + 1,
-          look: prevState.relatedLooks[prevState.currentLook]}
-      );
-    });
+    let lookCount = this.state.relatedLooks.length;
+    if (lookCount >= this.state.currentLook + 1) {
+      this.setState((prevState) => {
+        return (
+          {currentLook: prevState.currentLook + 1,
+            look: prevState.relatedLooks[prevState.currentLook]}
+        );
+      });
+    }
   }
 
   getLooksByProductId(productId) {
@@ -117,48 +121,19 @@ class Look extends React.Component {
             newLook.lookName = products[x].lookName;
             newLook.lookCreator = products[x].lookCreator;
             currentLook = products[x].lookName;
-            console.log(newLook, currentLook);
           }
           if (!newLook[productType] && productType) {
             newLook[productType] = [];
           }
           newLook[productType].push(products[x]);
         }
-        //we will still have one look that isn't pushed to the list because our if  condition didnt fire
         listOfLooks.push(newLook);
-        this.setState({look: listOfLooks[0], relatedLooks: listOfLooks}, ()=> { console.log(this.state); });
+        this.setState({look: listOfLooks[0], relatedLooks: listOfLooks});
         return listOfLooks;
       })
       .catch((err) => {
       });
   }
-
-  // getLookById(id) {
-  //   // axios.get('/api', {
-  //   //   params: {
-  //   //     lookId: id
-  //   //   }
-  //   // })
-  //   model.getLooksById(id)
-  //     .then((response) => {
-  //       console.log('RESPONSE', response);
-  //       // let products = response.data;
-  //       let products = response;
-  //       let newLook = {};
-  //       for (var x = 0; x <= products.length - 1; x++) {
-  //         if (!newLook[products[x].type]) {
-  //           newLook[products[x].type] = [];
-  //         }
-  //         newLook[products[x].type].push(products[x]);
-  //       }
-  //       let newLooks = Object.values(newLook);
-  //       this.setState({look: newLooks}, ()=>console.log(this.state));
-  //     })
-  //     .catch((err) => {
-  //       // console.log('error', err);
-  //       //removed error because it was making it difficult to read my jest tests.  ALSO, I need to learn how to mock this behavior in testing suite
-  //     });
-  // }
 
   updateCurrentlySelectedProduct(product) {
     this.setState({selectedProduct: product});
@@ -187,7 +162,7 @@ class Look extends React.Component {
         {this.state.displayModal ?
           <Modal product={this.state.selectedProduct} toggleModal={this.toggleModal}/> : ''
         }
-        <ColumnFiller/>
+        <ColumnFillerMini/>
         <LeftPanel className="left-panel">
           {this.state.look ?
             <LookHeader className="look-name" onClick={()=> { this.changeLook(); }}>

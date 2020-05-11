@@ -68,7 +68,6 @@ const Details = styled.div`
 `;
 
 const BagModal = (props) => {
-  console.log('bag', props);
   return (
     <Container>
       <Modal>

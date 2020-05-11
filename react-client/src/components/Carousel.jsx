@@ -29,11 +29,6 @@ class Carousel extends React.Component {
     this.shiftLeft = this.shiftLeft.bind(this);
     this.shiftRight = this.shiftRight.bind(this);
   }
-  componentDidMount() {
-    // if (this.state.type === 'bottoms') {
-    //   this.setState({picturePosition: 199.5});
-    // }
-  }
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
@@ -68,10 +63,6 @@ class Carousel extends React.Component {
       marginRight: '4.5rem'
     };
 
-    // if (this.state.type === 'bottoms') {
-    //   location.marginLeft = '4rem';
-    //   location.marginRight = '4rem';
-    // }
     return (
       <Row key={this.state.items[0].id} style={this.props.style}>
         <LeftArrow shiftLeft={this.shiftLeft} className='left-arrow'/>
