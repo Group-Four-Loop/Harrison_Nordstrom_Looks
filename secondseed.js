@@ -60,7 +60,7 @@ for (var x = 1; x <= 30; x ++) {
   db.insertIntoProducts(newBottom);
   db.insertIntoProducts(newShoes);
 }
-for (var i = 1; i <= 9; i++) {
+for (var i = 9; i <= 18; i++) {
   let look = {
     name: faker.commerce.productAdjective() + ' ' + faker.lorem.word(),
     creator: faker.name.findName(),
@@ -76,7 +76,7 @@ for (var i = 1; i <= 9; i++) {
   db.insertIntoLooksJunction(looksJunc);
 }
 
-for (var j = 10; j <= 80; j += 10) {
+for (var j = 90; j <= 170; j += 10) {
   let carouselJuncTop = {
     type: 'tops',
     lookId: j / 10,

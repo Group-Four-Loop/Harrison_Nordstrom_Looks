@@ -1,5 +1,5 @@
 import React from 'react';
-import Carousel from '../src/components/Carousel.jsx';
+import Carousel from '../../src/components/Carousel.jsx';
 import Enzyme, {mount, shallow, render} from 'enzyme';
 
 describe('The Carousel', () => {

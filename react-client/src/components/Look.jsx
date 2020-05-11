@@ -5,15 +5,17 @@ import Carousel from './Carousel.jsx';
 import model from '../models/Looks.js';
 import ProductView from './ProductView.jsx';
 import Empty from './EmptyProductView.jsx';
+import Modal from './BagModal.jsx';
 
 const Container = styled.div`
   display:flex;
   justify-content: space-between;
+  margin: 1%;
 `;
 const LeftPanel = styled.div`
   border: 1px solid grey;
-  width: 38%;
-  left: 0px;
+  width: 28%;
+  left: 10%;
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -50,11 +52,11 @@ const RightPanel = styled.div`
   display: flex;
   flex-direction: column;
   width:45%;
-  right: 0px;
+  right: 10%;
   align-content: center;
 `;
 const ColumnFiller = styled.div`
-width: 10%;
+  width: 10%;
 `;
 
 class Look extends React.Component {
@@ -62,17 +64,27 @@ class Look extends React.Component {
     super(props);
     this.state = {
       relatedLooks: [],
-      look: {},
+      look: {
+        lookName: '',
+        lookCreator: ''
+      },
       currentLook: 0,
-      selectedProduct: null
+      selectedProduct: null,
+      displayModal: false
     };
     // this.getLookById = this.getLookById.bind(this);
     this.changeLook = this.changeLook.bind(this);
     this.updateCurrentlySelectedProduct = this.updateCurrentlySelectedProduct.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentDidMount() {
-    this.getLooksByProductId(10);
+    return Promise.resolve(this.getLooksByProductId(10));
+  }
+
+  toggleModal() {
+    const modalState = this.state.displayModal;
+    this.setState({displayModal: !modalState}, () => { console.log('toggletoggle', this.state); });
   }
 
   changeLook() {
@@ -115,6 +127,7 @@ class Look extends React.Component {
         //we will still have one look that isn't pushed to the list because our if  condition didnt fire
         listOfLooks.push(newLook);
         this.setState({look: listOfLooks[0], relatedLooks: listOfLooks}, ()=> { console.log(this.state); });
+        return listOfLooks;
       })
       .catch((err) => {
       });
@@ -171,6 +184,10 @@ class Look extends React.Component {
 
     return (
       <Container className="app-container">
+        {this.state.displayModal ?
+          <Modal product={this.state.selectedProduct} toggleModal={this.toggleModal}/> : ''
+        }
+        <ColumnFiller/>
         <LeftPanel className="left-panel">
           {this.state.look ?
             <LookHeader className="look-name" onClick={()=> { this.changeLook(); }}>
@@ -190,7 +207,7 @@ class Look extends React.Component {
         </LeftPanel>
         <RightPanel className="right-panel">
           {(this.state.selectedProduct) ?
-            <ProductView product={this.state.selectedProduct}/> : <Empty/>
+            <ProductView product={this.state.selectedProduct} toggleModal={this.toggleModal}/> : <Empty/>
           }
         </RightPanel>
         <ColumnFiller/>
