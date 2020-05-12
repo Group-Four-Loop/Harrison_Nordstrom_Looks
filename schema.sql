@@ -1,5 +1,6 @@
 DROP DATABASE IF EXISTS nordstrom;
 CREATE DATABASE nordstrom;
+\c nordstrom;
 
 CREATE TABLE products(
   id                   SERIAL               NOT NULL,

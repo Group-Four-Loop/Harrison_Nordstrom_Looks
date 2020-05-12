@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "compile": "webpack -d -w",
+    "dbsetup": "psql nordstrom < schema.sql",
+    "dbseed1": "node seed.js",
+    "dbseed2": "node secondseed.js",
     "start": "node server/index.js",
     "test": "jest --collect-coverage"
   },
