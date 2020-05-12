@@ -1,6 +1,6 @@
 import React from 'react';
-import App from '../src/components/App.jsx';
-import Look from '../src/components/Look.jsx';
+import App from '../../src/components/App.jsx';
+import Look from '../../src/components/Look.jsx';
 import {mount, shallow, render} from 'enzyme';
 
 describe('Sets the App up properly', () => {
@@ -13,7 +13,7 @@ describe('Sets the App up properly', () => {
   it('Sets up the Look component properly', () => {
     let wrapper = shallow(<Look/>);
     //toEqual - all have same properties, not exact same obj
-    expect(wrapper.state()).toEqual({look: {}, currentLook: 1, selectedProduct: null});
+    expect(wrapper.state()).toEqual({look: {lookCreator: '', lookName: ''}, relatedLooks: [], currentLook: 0, displayModal: false, selectedProduct: null});
   });
 
 });

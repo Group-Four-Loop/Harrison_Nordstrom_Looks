@@ -125,11 +125,11 @@ class ProductView extends React.Component {
           <SizeGuide>Size guides</SizeGuide>
           <div>
             <br/>
-            color pictures
+            {/* color pictures */}
             <br/>
           </div>
           <br/>
-          <Checkout>Add to Bag</Checkout>
+          <Checkout onClick={()=>{ this.props.toggleModal(); }}>Add to Bag</Checkout>
           <DetailLink>
             <br/>
             See full details

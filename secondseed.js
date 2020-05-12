@@ -60,7 +60,7 @@ for (var x = 1; x <= 30; x ++) {
   db.insertIntoProducts(newBottom);
   db.insertIntoProducts(newShoes);
 }
-for (var i = 1; i <= 9; i++) {
+for (var i = 9; i <= 18; i++) {
   let look = {
     name: faker.commerce.productAdjective() + ' ' + faker.lorem.word(),
     creator: faker.name.findName(),
@@ -76,7 +76,7 @@ for (var i = 1; i <= 9; i++) {
   db.insertIntoLooksJunction(looksJunc);
 }
 
-for (var j = 10; j <= 80; j += 10) {
+for (var j = 90; j <= 170; j += 10) {
   let carouselJuncTop = {
     type: 'tops',
     lookId: j / 10,
@@ -105,4 +105,43 @@ for (var j = 10; j <= 80; j += 10) {
 for (var v = 1; v <= 9; v++) {
   db.updateLookCarousels(v, {tops: (v), bottoms: (v) + 1, footwear: (v) + 2});
 }
+/*
+const addItemsToLook = (currentIteration) => {
+  let accessoryCount = 0;
+  //generate a random number per our current iteration
+  let itemCount = (num) => {
+    if (num % 2 === 0) {
+      return (Math.floor(Math.random()*5) + 2);
+    }
+    return (Math.floor(Math.random()* 4) + 3);
+  }
+  //define a list of items we need it include on our carousel
+  let itemsToRender = [];
+  //get a random number of items to include
+  let numItemsToShow = itemCount(currentIteration);
+  //get a random item from list of items
+  while (numItemsToShow > 0) {
+    let itemList = Array.from(items);
+    let anItem = itemList.splice(Math.floor(Math.random()*itemList.length));
+    if (anItem === 'accessories') {
+      //number our accessories properly
+      accessoryCount++;
+      if (accessoryCount <= 3) {
+        itemsToRender.push(anItem+accessoryCount.toString());
+        //we should add accessories back to the list so it can be selected again if needed
+        itemList.push('accessories');
+      }
+    }
+    itemsToRender.push(anItem);
+    numItemsToShow--;
+  }
+  //* Populate the new look object with proper carousel IDs /
+  for (var x = 0; x <= itemsToRender.length - 1; x++) {
+    look[itemsToRender[x]] = //the id of a carouselJunc record with matching type and lookID
+  }
+}
+
+
+
+*/
 

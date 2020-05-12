@@ -15,12 +15,7 @@ const ComponentTitle = styled.div`
 
 const App = () => {
   return (
-    <Container>
-      <ComponentTitle>
-      LOOKS
-      </ComponentTitle>
-      <Look />
-    </Container>
+    <Look />
   );
 };
 

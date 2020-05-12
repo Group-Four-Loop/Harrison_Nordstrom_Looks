@@ -19,7 +19,7 @@ CREATE TABLE products(
 
 CREATE TABLE looks(
   id                    SERIAL              NOT NULL,
-  name                  VARCHAR(255)        NOT NULL,
+  name                  VARCHAR(1000)        NOT NULL,
   creator               VARCHAR(255)        NOT NULL,
   creatorImgUrl         VARCHAR(255)        NOT NULL,
   tops                  INT,
