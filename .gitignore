@@ -2,3 +2,4 @@ node_modules
 db/db.config.js
 .DS_Store
 coverage
+database.env

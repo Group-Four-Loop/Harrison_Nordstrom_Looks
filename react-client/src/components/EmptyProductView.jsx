@@ -7,7 +7,7 @@ const Container = styled.div`
   justify-content: space-between;
 `;
 const Info = styled.div`
-  position: absolute;
+  position: relative;
   top: 38%;
   left: 60%;
   font-family: Lato, sans-serif;

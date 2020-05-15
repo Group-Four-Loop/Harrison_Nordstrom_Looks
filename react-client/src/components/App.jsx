@@ -19,4 +19,5 @@ const App = () => {
   );
 };
 
+window.Looks = App;
 export default App;

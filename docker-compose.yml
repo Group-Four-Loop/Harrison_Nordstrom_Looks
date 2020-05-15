@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  con:
+    container_name:
+      looks_container
+    build: ./
+    depends_on:
+      - 'psq'
+    ports:
+      - '3000:3000'
+    working_dir: /src/app
+    volumes:
+      - ./:/src/app
+
+  psq:
+    image: 'postgres:latest'
+    container_name:
+      looks_db
+    environment:
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: student
+    restart: 'always'
+    ports:
+      - '8000:5432'
+    volumes:
+      - ./:/docker-entrypoint-initdb.d/

@@ -1,4 +1,4 @@
-const Client = require('pg').Client;
+const {Client} = require('pg');
 const config = require('./db.config.js');
 
 const client = new Client(config);
@@ -64,7 +64,6 @@ module.exports = {
   },
 
   insertIntoProducts: (product) => {
-    console.log(product.imgUrl);
     const {name, imgUrl, type, rating, brand, price, description, size, color, productUrl} = product;
     client.query(`INSERT INTO products ( name, imgUrl, type, rating, brand, price, description, size, color, productUrl) VALUES ('${product.name}', '${product.imgUrl}', '${product.type}', ${product.rating}, '${product.brand}', ${product.price}, '${product.description}', '${product.size}', '${product.color}', '${product.productUrl}')`, (err, result) => {
       if (err) {
