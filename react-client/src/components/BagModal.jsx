@@ -13,6 +13,7 @@ const Container = styled.div`
   justify-content: center;
   backdrop-filter: blur(10px);
   font-family: Lato, sans-serif;
+  font-display: swap;
 `;
 const Close = styled.div`
   font-weight: light;
@@ -79,7 +80,6 @@ const BagModal = (props) => {
         <Details>
           Size: {props.product.size}
           <br/>
-          Color: {props.product.color}
           <br/>
           <strong>${props.product.price}</strong>
         </Details>

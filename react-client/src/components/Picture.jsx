@@ -7,6 +7,7 @@ const Product = styled.div`
   flex-direction: column;
   align-items: center;
   font-family: Lato, sans-serif;
+  font-display: swap;
 `;
 const Brand = styled.div`
   font-weight: 300;
@@ -18,15 +19,15 @@ const Price = styled.div`
   font-weight: bold;
 `;
 const Picture = styled.img`
-  max-height: 340px;
-  width: 150px;
+  max-height: 283px;
+  width: 125px;
   object-fit:contain;
   z-index: -1
 `;
 const Pictures = (props) => {
   return (
     <Product key={props.product.id} style={props.position}>
-      <Picture src={`${props.product.imgurl}`} onClick={() => { props.selectProduct(props.product); }}></Picture>
+      <Picture src={`${props.product.imgurl}`} alt={`${props.product.type}-photo`} onClick={() => { props.selectProduct(props.product); }}></Picture>
       <Brand>{props.product.brand}</Brand>
       <Price>{`$${props.product.price}`}</Price>
     </Product>

@@ -20,6 +20,7 @@ const ProductDetails = styled.div`
   width: 50%;
   right: 0;
   font-family: 'Lato', sans-serif;
+  font-display: swap;
   margin-left: 3rem;
 `;
 const ProductHeader = styled.div`

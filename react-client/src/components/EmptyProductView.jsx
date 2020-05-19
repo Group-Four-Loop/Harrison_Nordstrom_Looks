@@ -11,6 +11,7 @@ const Info = styled.div`
   top: 38%;
   left: 60%;
   font-family: Lato, sans-serif;
+  font-display: swap;
   font-style: Thin;
 `;
 const ProductImage = styled.img`
@@ -28,6 +29,7 @@ const ProductDetails = styled.div`
   width: 50%;
   right: 0;
   font-family: 'Lato', sans-serif;
+  font-display: swap;
   margin-left: 3rem;
   opacity: 25%
 `;

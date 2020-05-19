@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import Carousel from './Carousel.jsx';
 import model from '../models/Looks.js';
@@ -26,6 +27,7 @@ const LookHeader = styled.div`
   justify-content: center;
   height: 9%;
   font-family: Lato, sans-serif;
+  font-display: swap;
 `;
 const LookName = styled.div`
   font-size: large;
@@ -51,7 +53,6 @@ const RightPanel = styled.div`
   display: flex;
   flex-direction: column;
   width:45%;
-  right: 10%;
   align-content: center;
 `;
 const ColumnFiller = styled.div`
@@ -80,12 +81,17 @@ class Look extends React.Component {
   }
 
   componentDidMount() {
-    return Promise.resolve(this.getLooksByProductId(10));
+    let productId = window.location.search.substring(1).split('=')[1];
+    if (productId) {
+      return Promise.resolve(this.getLooksByProductId(productId));
+    } else {
+      return Promise.resolve(this.getLooksByProductId(501));
+    }
   }
 
   toggleModal() {
     const modalState = this.state.displayModal;
-    this.setState({displayModal: !modalState});
+    this.setState({ displayModal: !modalState });
   }
 
   changeLook() {
@@ -93,16 +99,20 @@ class Look extends React.Component {
     if (lookCount >= this.state.currentLook + 1) {
       this.setState((prevState) => {
         return (
-          {currentLook: prevState.currentLook + 1,
-            look: prevState.relatedLooks[prevState.currentLook]}
+          {
+            currentLook: prevState.currentLook + 1,
+            look: prevState.relatedLooks[prevState.currentLook]
+          }
         );
-      });
+      }, () => { console.log(this.state.currentLook); });
     }
   }
 
   getLooksByProductId(productId) {
+    productId = productId || window.location.search.substring(1).split('=')[1];
     model.getLooksByProductId(productId)
       .then((response) => {
+        console.log(response);
         let products = response;
         var newLook = {};
         let listOfLooks = [];
@@ -128,15 +138,16 @@ class Look extends React.Component {
           newLook[productType].push(products[x]);
         }
         listOfLooks.push(newLook);
-        this.setState({look: listOfLooks[0], relatedLooks: listOfLooks});
+        this.setState({ look: listOfLooks[0], relatedLooks: listOfLooks });
         return listOfLooks;
       })
       .catch((err) => {
+        console.log(err);
       });
   }
 
   updateCurrentlySelectedProduct(product) {
-    this.setState({selectedProduct: product});
+    this.setState({ selectedProduct: product });
   }
 
   render() {
@@ -153,28 +164,32 @@ class Look extends React.Component {
 
     let productCarousels = looks.map(carousel => {
       let order = (carousel[0].type === 'tops') ? -1 : (carousel[0].type === 'bottoms') ? 0 : 1;
-      return ( <Carousel key={carousel[0].type} items={carousel} style={{'order': order}} selectFunc={this.updateCurrentlySelectedProduct}/>
+      return (<Carousel key={carousel[0].type} items={carousel} style={{ 'order': order }} selectFunc={this.updateCurrentlySelectedProduct} />
       );
     });
 
     return (
       <Container className="app-container">
+        {/* {this.state.displayModal ?
+          ReactDOM.createPortal(
+            <Modal product={this.state.selectedProduct} toggleModal={this.toggleModal}/>, document.getElementById('modal-root')) : ''
+        } */}
         {this.state.displayModal ?
-          <Modal product={this.state.selectedProduct} toggleModal={this.toggleModal}/> : ''
+          <Modal product={this.state.selectedProduct} toggleModal={this.toggleModal} /> : ''
         }
-        <ColumnFillerMini/>
+        <ColumnFillerMini />
         <LeftPanel className="left-panel">
           {this.state.look ?
-            <LookHeader className="look-name" onClick={()=> { this.changeLook(); }}>
+            <LookHeader className="look-name" onClick={() => { this.changeLook(); }}>
               <LookName>
                 {lookName}
-                <br/>
+                <br />
               </LookName>
               <LookCreator>
                 {creator}
               </LookCreator>
             </LookHeader> :
-            <LookHeader className="look-name" onClick={()=> { this.changeLook(); }}/>
+            <LookHeader className="look-name" onClick={() => { this.changeLook(); }} />
           }
           <LookWindow>
             {productCarousels}
@@ -182,10 +197,10 @@ class Look extends React.Component {
         </LeftPanel>
         <RightPanel className="right-panel">
           {(this.state.selectedProduct) ?
-            <ProductView product={this.state.selectedProduct} toggleModal={this.toggleModal}/> : <Empty/>
+            <ProductView product={this.state.selectedProduct} toggleModal={this.toggleModal} /> : <Empty />
           }
         </RightPanel>
-        <ColumnFiller/>
+        <ColumnFiller />
       </Container>
     );
   }

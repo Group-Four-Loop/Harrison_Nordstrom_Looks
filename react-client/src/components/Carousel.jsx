@@ -7,7 +7,7 @@ import LeftArrow from './LeftArrow.jsx';
 const Row = styled.div`
   position: relative;
   margin-bottom: 1rem;
-  width:30%;
+  width:40%;
   box-sizing: border-box;
   display:flex;
   align-items:center;
@@ -23,8 +23,8 @@ class Carousel extends React.Component {
       items: props.items,
       type: props.items[0].type,
       //set viewport (or the position of currently displayed photo (will rename later) -- we want to show left-most photo so we need to shift our 'photoslide' to the right)
-      picturePosition: 199.5,
-      size: 199.5
+      picturePosition: 210,
+      size: 210
     };
     this.shiftLeft = this.shiftLeft.bind(this);
     this.shiftRight = this.shiftRight.bind(this);
@@ -34,8 +34,8 @@ class Carousel extends React.Component {
     // Typical usage (don't forget to compare props):
 
     if (this.props.items !== prevProps.items) {
-      // let newPicPosition = (this.props.type === 'bottoms') ? 199.5 : 199.5;
-      let newPicPosition = 199.5;
+      // let newPicPosition = (this.props.type === 'bottoms') ? 210 : 210;
+      let newPicPosition = 210;
       this.setState({items: this.props.items, picturePosition: newPicPosition});
     }
   }
@@ -59,8 +59,8 @@ class Carousel extends React.Component {
 
     let location = {
       transform: `translateX(${vp}%)`,
-      marginLeft: '4.5rem',
-      marginRight: '4.5rem'
+      marginLeft: '4.45rem',
+      marginRight: '4.45rem'
     };
 
     return (

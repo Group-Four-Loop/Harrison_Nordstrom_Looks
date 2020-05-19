@@ -1,0 +1,11 @@
+version: '3'
+services:
+  app:
+    container_name:
+      looks_container
+    image: phileasthefogg/looks
+    ports:
+      - '3000:3000'
+    working_dir: /src/app
+    volumes:
+      - ./:/src/app

@@ -10,6 +10,7 @@ const ComponentTitle = styled.div`
   padding-top: 1rem;
   padding-bottom: 1rem;
   font-family: Lato, sans-serif;
+  font-display: swap;
   font-weight: bold;
 `;
 
