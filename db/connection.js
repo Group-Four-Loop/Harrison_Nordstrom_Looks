@@ -19,17 +19,8 @@ module.exports = {
     });
   },
 
-  /**
-   *
-   * `SELECT * FROM carouselJunc LEFT JOIN products ON (carouselJunc.productid1=${productId} OR carouselJunc.productid2=${productId} OR carouselJunc.productid3=${productId}) WHERE (carouselJunc.productid1=products.id OR carouselJunc.productid2=products.id OR carouselJunc.productid3=products.id)`
-   *
-   *
-   * `select * from carouselJunc INNER JOIN products ON (carouselJunc.productId1 = products.id OR carouselJunc.productId2 = products.id OR carouselJunc.productId3 = products.id) WHERE products.id=${productId} OR products.id IN (SELECT productId FROM looksJunc)`
-   */
-
   //returns all items listed on ANY look where at least one of the carousels contains a given productID
   getLooksByProductId: (productId, callback) => {
-    console.log('called');
     let sqlQuery = 'select * from carouselJunc INNER JOIN products ON (carouselJunc.productId1 = products.id OR carouselJunc.productId2 = products.id OR carouselJunc.productId3 = products.id) WHERE products.id IN (SELECT productId FROM looksJunc) OR carouselJunc.lookId IN (SELECT lookId from looksJunc)';
     client.query(sqlQuery, (err, result) => {
       if (err) {
@@ -41,7 +32,6 @@ module.exports = {
   },
 
   getLookDetails: (LookIdString, callback) => {
-    console.log('names', LookIdString);
     let query = `SELECT * FROM looks WHERE id IN (${LookIdString})`;
     client.query(query, (err, result) => {
       if (err) {
