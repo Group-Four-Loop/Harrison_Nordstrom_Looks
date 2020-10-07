@@ -14,8 +14,8 @@
 #### api/looks?:lookId
   Returns a list of products associated with a specific lookId
 ```
-  [
-{
+[
+  {
         "lookid": 1,
         "productid": 10,
         "type": "tops",
@@ -32,7 +32,7 @@
         "lookCreator": "Gregg Volkman"
     },
     ...
-  ]
+ ]
 ```
 
 
