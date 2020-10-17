@@ -12,7 +12,7 @@
 
 #### GET ```api/looks?:lookId```
 ##### Path Parameters: 
-- ```id```Look ID
+- ```id```integer
 ##### Success Status Code: ```200```
   Returns a list of products associated with a specific lookId as JSON
 ```
