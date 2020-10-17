@@ -12,7 +12,7 @@
 
 #### GET ```api/looks?:lookId```
 ##### Path Parameters: 
-```id```Look ID
+- ```id```Look ID
 ##### Success Status Code: ```200```
   Returns a list of products associated with a specific lookId as JSON
 ```
@@ -39,7 +39,7 @@
 
 #### GET ```api/items```
 ##### Path Parameters: 
-```none```
+- ```none```
 ##### Success Status Code: ```200```
   Returns a list of all items
 ```
@@ -78,18 +78,16 @@
 
 #### POST ```api/items```
 ##### Path Parameters: 
-<ul>
-  <li>```name``` string</li>
-<li>```imgUrl``` string/li>
-<li>```type``` string/li>
-<li>```rating``` float/li>
-<li>```price``` float/li>
-<li>```brand``` string/li>
-<li>```description``` string/li>
-<li>```size``` string/li>
-<li>```color``` string/li>
-<li>```productUrl``` string/li>
-</ul>
+- ```name``` string
+- ```imgUrl``` string
+- ```type``` string
+- ```rating``` float
+- ```price``` float
+- ```brand``` string
+- ```description``` string
+- ```size``` string
+- ```color``` string
+- ```productUrl``` string
 ##### Success Status Code: ```200```
   Insert a new product into the database
 ```javascript
