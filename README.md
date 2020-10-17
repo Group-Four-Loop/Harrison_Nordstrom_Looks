@@ -8,11 +8,13 @@
 
 <hr> </hr>
 
-## Endpoints
+## API Reference
 
-### GET: 
-#### api/looks?:lookId
-  Returns a list of products associated with a specific lookId
+#### GET ```api/looks?:lookId```
+##### Path Parameters: 
+```id```Look ID
+##### Success Status Code: ```200```
+  Returns a list of products associated with a specific lookId as JSON
 ```
 [
   {
@@ -35,8 +37,10 @@
  ]
 ```
 
-
-#### api/items
+#### GET ```api/items```
+##### Path Parameters: 
+```none```
+##### Success Status Code: ```200```
   Returns a list of all items
 ```
   [
@@ -72,9 +76,21 @@
 
 <hr></hr>
 
-### POST
-
-#### /api/items
+#### POST ```api/items```
+##### Path Parameters: 
+<ul>
+  <li>```name``` string</li>
+<li>```imgUrl``` string/li>
+<li>```type``` string/li>
+<li>```rating``` float/li>
+<li>```price``` float/li>
+<li>```brand``` string/li>
+<li>```description``` string/li>
+<li>```size``` string/li>
+<li>```color``` string/li>
+<li>```productUrl``` string/li>
+</ul>
+##### Success Status Code: ```200```
   Insert a new product into the database
 ```javascript
   //Example using axios with url query params.  Recommend passing all fields, though they remain optional for your convenience
